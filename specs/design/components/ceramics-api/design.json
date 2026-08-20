@@ -1,0 +1,22 @@
+{
+  "name": "ceramics-api",
+  "type": "service",
+  "version": "0.1.0",
+  "language": "Ballerina",
+  "buildpack": "docker",
+  "appPath": "ceramics-api",
+  "entrypoint": "deployment/service",
+  "exposure": "intranet",
+  "dependencies": [
+    { "kind": "platform-resource", "name": "ceramics-db", "resourceType": "postgres", "description": "Stores products, inventory levels, carts, orders, and order status history." },
+    { "kind": "platform-resource", "name": "user-auth", "resourceType": "thunder-app", "parameters": { "scopes": "openid profile email" }, "description": "Validates the caller's Thunder-issued token and resolves the shopper vs. store-admin role for protected endpoints." },
+    { "kind": "external", "name": "payment-provider", "description": "Hosted third-party card-payment checkout used to process order payments; vendor not yet pinned.",
+      "candidates": [
+        { "name": "stripe", "style": "sdk", "package": "npm:stripe@^14" },
+        { "name": "braintree", "style": "sdk", "package": "npm:braintree@^3" },
+        { "name": "adyen", "style": "rest-api" }
+      ] }
+  ],
+  "description": "The store's backend API: product catalog CRUD and browsing, cart, checkout orchestration (flat-rate shipping, hosted card payment), order creation and status tracking, inventory management, and role-gated admin operations. Owns all persistence and the payment integration; the webapp never touches the database or the payment provider directly.",
+  "skillsPinned": ["openapi-conventions", "ballerina", "thunder-authentication", "api-management"]
+}
