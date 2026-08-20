@@ -1,5 +1,12 @@
 {
   "name": "ceramics-api",
+  "type": "service",
+  "version": "0.1.0",
+  "language": "Ballerina",
+  "buildpack": "docker",
+  "appPath": "ceramics-api",
+  "entrypoint": "deployment/service",
+  "exposure": "intranet",
   "stories": [
     1,
     2,
@@ -15,13 +22,6 @@
     12,
     13
   ],
-  "type": "service",
-  "version": "0.1.0",
-  "language": "Ballerina",
-  "buildpack": "docker",
-  "appPath": "ceramics-api",
-  "entrypoint": "deployment/service",
-  "exposure": "intranet",
   "description": "The store's backend API: product catalog CRUD and browsing, cart, checkout orchestration (flat-rate shipping, hosted card payment), order creation and status tracking, inventory management, and role-gated admin operations. Owns all persistence and the payment integration; the webapp never touches the database or the payment provider directly.",
   "dependencies": [
     {
@@ -32,11 +32,11 @@
       "wiring": {
         "ref": "store-handmade-ce-9ffc9e02",
         "envBindings": {
+          "dbname": "CERAMICS_DB_DBNAME",
           "host": "CERAMICS_DB_HOST",
+          "password": "CERAMICS_DB_PASSWORD",
           "port": "CERAMICS_DB_PORT",
-          "dbname": "CERAMICS_DB_DATABASE",
-          "user": "CERAMICS_DB_USERNAME",
-          "password": "CERAMICS_DB_PASSWORD"
+          "user": "CERAMICS_DB_USER"
         }
       }
     },
