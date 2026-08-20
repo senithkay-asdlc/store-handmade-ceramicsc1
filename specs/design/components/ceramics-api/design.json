@@ -28,18 +28,15 @@
       "kind": "platform-resource",
       "name": "ceramics-db",
       "description": "Stores products, inventory levels, carts, orders, and order status history.",
-      "resourceType": "postgres",
+      "resourceType": "postgres-cnpg",
       "wiring": {
         "ref": "store-handmade-ce-9ffc9e02",
         "envBindings": {
-          "adminPassword": "CERAMICS_DB_ADMINPASSWORD",
-          "adminURL": "CERAMICS_DB_ADMINURL",
-          "database": "CERAMICS_DB_DATABASE",
           "host": "CERAMICS_DB_HOST",
-          "password": "CERAMICS_DB_PASSWORD",
           "port": "CERAMICS_DB_PORT",
-          "url": "CERAMICS_DB_URL",
-          "username": "CERAMICS_DB_USERNAME"
+          "dbname": "CERAMICS_DB_DATABASE",
+          "user": "CERAMICS_DB_USERNAME",
+          "password": "CERAMICS_DB_PASSWORD"
         }
       }
     },
